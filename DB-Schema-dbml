@@ -44,3 +44,9 @@ Table resource {
   name varchar
   FK_resource_cat_id integer [ref: > resource_cat.id]
 }
+
+Table need_sat_resource {
+  id integer [primary key]
+  FK_resource_id integer [ref: > resource.id]
+  FK_need_id integer [ref: > need.id]
+}
