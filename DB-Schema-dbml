@@ -1,0 +1,46 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table need {
+  id integer [primary key]
+  name varchar
+  FK_need_cat_id integer [ref: > need_cat.id]
+}
+
+Table need_cat {
+  id integer [primary key]
+  name varchar 
+}
+
+Table building {
+  id integer [primary key]
+  name varchar 
+}
+
+Table natural_structure_cat {
+  id integer [primary key]
+  name varchar 
+}
+
+Table natural_structure {
+  id integer [primary key]
+  name varchar 
+  days_to_grow integer
+  days_between_harvest integer
+  resource_one_yield integer
+  resource_two_yield integer
+  FK_natural_structure_cat_id integer [ref: > natural_structure_cat.id]
+  FK_resource_one_id integer [ref: > resource.id]
+  FK_resource_two_id integer [ref: > resource.id]
+}
+
+Table resource_cat {
+  id integer [primary key]
+  name varchar 
+}
+
+Table resource {
+  id integer [primary key]
+  name varchar
+  FK_resource_cat_id integer [ref: > resource_cat.id]
+}
