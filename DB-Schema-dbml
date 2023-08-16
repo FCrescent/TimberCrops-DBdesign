@@ -50,3 +50,8 @@ Table need_sat_resource {
   FK_resource_id integer [ref: > resource.id]
   FK_need_id integer [ref: > need.id]
 }
+
+//For resource transformation, go with 
+//1 table "resource_prod" (id, duration) , 
+//1 table "resource_prod_ingrd" (fk_res_prod, fk_res, ingrd_qty) and 
+//1 table "resource_prod_rslt" (fk_res_prod, fk_res, rslt_qty)
