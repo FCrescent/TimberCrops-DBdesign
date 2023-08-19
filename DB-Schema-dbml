@@ -1,10 +1,7 @@
-// Use DBML to define your database structure
-// Docs: https://dbml.dbdiagram.io/docs
-
 Table need {
   id integer [primary key]
   name varchar
-  FK_need_cat_id integer [ref: > need_cat.id]
+  fk_need__need_cat integer [ref: > need_cat.id]
 }
 
 Table need_cat {
@@ -17,21 +14,21 @@ Table building {
   name varchar 
 }
 
-Table natural_structure_cat {
+Table nat_struct_cat {
   id integer [primary key]
   name varchar 
 }
 
-Table natural_structure {
+Table nat_struct {
   id integer [primary key]
   name varchar 
   days_to_grow integer
   days_between_harvest integer
   resource_one_yield integer
   resource_two_yield integer
-  FK_natural_structure_cat_id integer [ref: > natural_structure_cat.id]
-  FK_resource_one_id integer [ref: > resource.id]
-  FK_resource_two_id integer [ref: > resource.id]
+  fk_nat_struct__nat_struct_cat integer [ref: > nat_struct_cat.id]
+  fk_nat_struct__resource_1 integer [ref: > resource.id]
+  fk_nat_struct__resource_2 integer [ref: > resource.id]
 }
 
 Table resource_cat {
@@ -42,16 +39,27 @@ Table resource_cat {
 Table resource {
   id integer [primary key]
   name varchar
-  FK_resource_cat_id integer [ref: > resource_cat.id]
+  fk_resource__resource_cat integer [ref: > resource_cat.id]
 }
 
 Table need_sat_resource {
   id integer [primary key]
-  FK_resource_id integer [ref: > resource.id]
-  FK_need_id integer [ref: > need.id]
+  fk_need_sat__resource integer [ref: > resource.id]
+  fk_need_sat__need integer [ref: > need.id]
 }
 
-//For resource transformation, go with 
-//1 table "resource_prod" (id, duration) , 
-//1 table "resource_prod_ingrd" (fk_res_prod, fk_res, ingrd_qty) and 
-//1 table "resource_prod_rslt" (fk_res_prod, fk_res, rslt_qty)
+//After some thoughts, it was realised that resource_prod never ends 
+//with multiple result products and hence no additional "resource_prod_rslt" table is needed
+Table resource_prod {
+  id integer [primary key]
+  duration float
+  produced_qty integer
+  fk_resource_prod__resource integer [ref: > resource.id]
+  fk_resource_prod__building integer [ref: > building.id]
+}
+
+Table resource_prod_ingrd {
+  ingrd_qty float
+  fk_resource_prod_ingrd__resource_prod integer [ref: > resource_prod.id]
+  fk_resource_prod_ingrd__resource integer [ref: > resource.id]
+}
