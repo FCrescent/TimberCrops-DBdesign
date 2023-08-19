@@ -1,3 +1,6 @@
+// Use DBML to define your database struct
+// Docs: https://dbml.dbdiagram.io/docs
+
 Table need {
   id integer [primary key]
   name varchar
@@ -48,8 +51,6 @@ Table need_sat_resource {
   fk_need_sat__need integer [ref: > need.id]
 }
 
-//After some thoughts, it was realised that resource_prod never ends 
-//with multiple result products and hence no additional "resource_prod_rslt" table is needed
 Table resource_prod {
   id integer [primary key]
   duration float
