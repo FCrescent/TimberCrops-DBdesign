@@ -27,11 +27,11 @@ Table nat_struct {
   name varchar 
   days_to_grow integer
   days_between_harvest integer
-  resource_one_yield integer
-  resource_two_yield integer
+  resource_cut_yield integer
+  resource_harvest_yield integer
   fk_nat_struct__nat_struct_cat integer [ref: > nat_struct_cat.id]
-  fk_nat_struct__resource_1 integer [ref: > resource.id]
-  fk_nat_struct__resource_2 integer [ref: > resource.id]
+  fk_nat_struct__resource_cut integer [ref: > resource.id]
+  fk_nat_struct__resource_harvest integer [ref: > resource.id]
 }
 
 Table resource_cat {
